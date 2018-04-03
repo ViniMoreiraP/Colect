@@ -17,7 +17,7 @@
 
 
 
-	$sql= "SELECT * from livros order by data_inclusao desc limit 12";
+	$sql= "SELECT * from livros order by data_inclusao desc limit 9";
 
 
 	 $resultado_id= mysqli_query($link, $sql);
@@ -29,12 +29,12 @@
 	echo '
 
 
-           <div class="col-xs-6 col-md-4" style="border: 1px solid red" >
+           <div class="col-xs-6 col-md-4" >
 
            	<h4> '.$registo['titulo'].' </h4>
 
 
-            <a href="#" class="thumbnail">
+            <a href="livro.php?cod='.md5($registo['id_livro']).'&" class="thumbnail">
              <img class="primeirasAmostras" src="img-livros/'.$registo['arquivo'].'" >
                </a>
           </div>    

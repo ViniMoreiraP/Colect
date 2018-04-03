@@ -3,11 +3,11 @@
    session_start();
    if (!isset($_SESSION['usuario'])) header('location: index.php');
 
+   $id_livro= $_GET['cod'];
 
 
-
-  
  ?>
+
 
 
 
@@ -27,19 +27,26 @@
     <link rel="stylesheet" type="text/css" href="css/estilo.css">
 
 
-
-
         <script type="text/javascript">
+          
+
+
+
+
           $(document).ready(function(){
 
 
 
            function atualizaLivros(){
         $.ajax({
-          url: 'atualiza_livros.php',
+          url: 'dados_livro.php',
+         method: 'post',
+         data: { id_livro_crip: '<?php echo $id_livro ?>' },
+
+     
           success: function(data){
-            $('#recendes').html(data);
-             
+            $('#dados').html(data);
+            
           }
           })
        }
@@ -56,10 +63,6 @@
 
 
 
-
-
-
-
   </head>
 
 
@@ -68,7 +71,7 @@
     
       <!--cabecalho-->
 
-    <nav class="navbar navbar-default navbar-fixed-top navbar-verde "  role="navigation">
+  <nav class="navbar navbar-default navbar-fixed-top navbar-verde "  role="navigation">
       
 
       <div class="container">
@@ -194,65 +197,53 @@
 
 
 
+
     <div class="jumbotron">
      <div class="container principal">
 
       <div class="row">
               <div class="col-md-3">
         
-             <div class="panel panel-default">
-            <div class="panel-body">
-
-              <h4> Seja Bem Vindo,  <?= $_SESSION['usuario'] ?></h4> 
-
-
-              <hr>
-              <div class="row" >
-
-              <div class="col-md-6">
-                Seus Livros <br> 
-                0 
-              </div>
-              <div class="col-md-6">
-               Livros Totais<br>
-               0
-              </div>
-              </div>
-
-              <br>
-
-              <div class="row">
-
-              <div class="col-md-6">
-                Qualquer coisa <br> 
-               0 
-              </div>
-              <div class="col-md-6">
-                Outra coisa<br>
-                0 
-              </div>
-              </div>
-
-
-            </div>
+            <div class="panel panel-default">
+          <div class="panel-body">
+            <form id="form_tweet" class="input-group">
+              <input type="text" id="text_tweet" name="texto_tweet" class="form-control" placeholder="O que está acontecendo agora?" maxlength="140" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" id="btn_tweet" type="button">Tweet</button>
+              </span>
+            </form>
           </div>
+        </div>
 
 
+        <div id="tweets" class="list-group">
+          
 
+
+        </div>
 
       </div>
 
       <div class="col-md-9" > 
 
+    
 
 
+
+   
+     
+
+
+
+ 
              <div class="panel panel-default">
-              <div style="text-align: center;"><h2>Adicionados Recentemente</h2></div>
+      
               
-            <div class="panel-body"  id="recendes">
+            <div class="panel-body"  id="dados">
 
 
-      </div>
+        </div>
+
       </div>
 
 

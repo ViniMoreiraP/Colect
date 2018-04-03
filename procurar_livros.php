@@ -32,21 +32,30 @@
         <script type="text/javascript">
           $(document).ready(function(){
 
+          $('#btn_procura_livros').click(function(){
+
+          if($('#nome_livro').val().length > 0){
+
+          $.ajax({
+
+            url: 'get_livros.php',
+            method: 'post',
+            data: $('#form_procura_livros').serialize() ,
+            success: function(data){
+            $('#livros').html(data);
+            }
 
 
-           function atualizaLivros(){
-        $.ajax({
-          url: 'atualiza_livros.php',
-          success: function(data){
-            $('#recendes').html(data);
-             
-          }
           })
-       }
 
 
-        atualizaLivros();
+        }else{
+          alert('digite algo, babaca');
+        }
+      });
 
+
+           
 
       });
 
@@ -241,19 +250,31 @@
 
 
       </div>
+        <div class="col-md-9">
+        
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <form id="form_procura_livros" class="input-group">
+              <input type="text" id="nome_livro" name="nome_livro" class="form-control" placeholder="Quem voce esta procurando?" maxlength="140" />
+              <span class="input-group-btn">
+                <button class="btn btn-default" id="btn_procura_livros" type="button">Procurar</button>
+              </span>
+            </form>
+          </div>
+        </div>
 
-      <div class="col-md-9" > 
+
+        <div id="livros" class="list-group">
+          
+
+
+        </div>
 
 
 
-             <div class="panel panel-default">
-              <div style="text-align: center;"><h2>Adicionados Recentemente</h2></div>
-              
-            <div class="panel-body"  id="recendes">
 
 
-      </div>
-      </div>
+
 
 
 
