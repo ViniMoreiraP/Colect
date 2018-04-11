@@ -6,3 +6,8 @@ nav.navbar-default {
 .jumbotron .principal{
 	padding-top: 20px;
 }
+
+
+ small{
+	float: right;
+}

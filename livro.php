@@ -28,6 +28,10 @@
 
 
         <script type="text/javascript">
+
+          
+
+   
           
 
 
@@ -37,23 +41,48 @@
 
 
 
-           function atualizaLivros(){
-        $.ajax({
-          url: 'dados_livro.php',
-         method: 'post',
-         data: { id_livro_crip: '<?php echo $id_livro ?>' },
-
-     
-          success: function(data){
-            $('#dados').html(data);
-            
-          }
-          })
-       }
 
 
-        atualizaLivros();
 
+             function perfil_livro(){
+              $.ajax({
+                url: 'dados_livro.php',
+                method: 'post',
+                data: {
+                id_livro_crip:'<?php echo $id_livro ?>' 
+                      },
+                success: function(data){
+                  $('#dados').html(data);
+                }
+              })
+            }
+
+
+            function chat(){
+              $.ajax({
+                url: 'chat.php',
+                method: 'post',
+                data: {
+                id_livro_crip:'<?php echo $id_livro ?>' 
+                      },
+                success: function(data){
+                  $('#chat').html(data);
+                }
+              })
+            }
+
+
+        
+
+
+        chat();
+
+        perfil_livro();
+
+
+
+
+      
 
       });
 
@@ -98,7 +127,7 @@
         
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="">Sobre</a></li>
+            <li><a id="#" href="">Sobre</a></li>
             <li><a href="">Ajuda</a></li>
             <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Livros <span class="caret"></span></a>
@@ -161,7 +190,7 @@
                   <textarea class="form-control" rows="5" name="descricao"
                   placeholder="Digite alguns comentarios sobre o livro.
 
-*Estado do livro
+          *Estado do livro
 *Local de troca
 *Qualquer outra coisa que achar relevante
 
@@ -200,42 +229,24 @@
 
     <div class="jumbotron">
      <div class="container principal">
-
+     
       <div class="row">
-              <div class="col-md-3">
+              <div class="col-md-4">
         
             <div class="panel panel-default">
-          <div class="panel-body">
-            <form id="form_tweet" class="input-group">
-              <input type="text" id="text_tweet" name="texto_tweet" class="form-control" placeholder="O que está acontecendo agora?" maxlength="140" />
-              <span class="input-group-btn">
-                <button class="btn btn-default" id="btn_tweet" type="button">Tweet</button>
-              </span>
-            </form>
+          <div class="panel-body" id="chat">
+            
+            
           </div>
         </div>
 
+       
 
-        <div id="tweets" class="list-group">
-          
-
-
-        </div>
 
       </div>
 
-      <div class="col-md-9" > 
+      <div class="col-md-8" > 
 
-    
-
-
-
-   
-     
-
-
-
- 
              <div class="panel panel-default">
       
               

@@ -13,7 +13,7 @@
 	$objDb = new db();
 	$link =$objDb->conecta_mysql();
 
-	$id_usuario=$_SESSION['id_usuario'];
+	
 	$nome_livro= $_POST['nome_livro'];
 
 
