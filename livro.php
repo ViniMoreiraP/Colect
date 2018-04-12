@@ -191,8 +191,8 @@
                   placeholder="Digite alguns comentarios sobre o livro.
 
           *Estado do livro
-*Local de troca
-*Qualquer outra coisa que achar relevante
+          Local de troca
+          *Qualquer outra coisa que achar relevante
 
                   "></textarea>
                     </div>

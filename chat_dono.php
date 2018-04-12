@@ -23,7 +23,7 @@
 
         	  $(document).ready(function(){
 
-   				var  id_chat;
+   			      	var  id_chat;
         	  	$('.conversa').hide();
 
 
@@ -126,33 +126,56 @@
 
 
   		<?php 
-  				
-	 $sql= "SELECT cl.* , u.usuario FROM chat_livro as cl JOIN usuarios as u ON (cl.id_interessado= u.id) WHERE id_livro =$id_livro " ;
-	
-	 $resultado_id= mysqli_query($link, $sql);
+  	
+	   $sql= "SELECT cl.* , u.usuario FROM chat_livro as cl JOIN usuarios as u ON (cl.id_interessado= u.id) WHERE id_livro =$id_livro " ;
+	 
+	  
+
+    if ($resultado_id= mysqli_query($link, $sql)) {
 
 
-  		 if ($resultado_id) {
-	 		
-	 	 if ( is_null(mysqli_fetch_array($resultado_id,MYSQLI_ASSOC) )){
-	 		echo '<a href ="#" class="list-group-item ">';
-	   	 	echo '<h5 class="list-group-item-heading"> Nao existem mensagens de<br> usuarios  a este livro </h5> ';
+       $registo= mysqli_fetch_array($resultado_id,MYSQLI_ASSOC);
+
+
+       if (is_null($registo)) {
+       echo '<a href ="#" class="list-group-item">';
+       echo '<h5 class="list-group-item-heading"> Nao houveram solicitacoes para este livro </h5> ';
+       echo '</a>';
+       }else{
+
+
+       echo '<a id='.$registo['id_chat'].' href ="#" class="list-group-item lista-chats ">';
+       echo '<h5 class="list-group-item-heading">'.$registo['usuario'].' </h5> ';
+       echo '</a>';
+        
+
+
+       }
+
+        while($registo= mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){
+
+          if (!isset($registo['id_chat'])) {
+            $vazio=false;
+          }
+
+        echo '<a id='.$registo['id_chat'].' href ="#" class="list-group-item lista-chats ">';
+       echo '<h5 class="list-group-item-heading">'.$registo['usuario'].' </h5> ';
+       echo '</a>';
+        
+
+
+
+      
+
+
+        }
+
+     }
+  
+
+
 	   
 	   
-	   	 echo '</a>';
-
-	 	 }
-
-
-
-	   while($registo= mysqli_fetch_array($resultado_id,MYSQLI_ASSOC)){
-	   	 echo '<a id='.$registo['id_chat'].' href ="#" class="list-group-item lista-chats ">';
-	   	 echo '<h5 class="list-group-item-heading">'.$registo['usuario'].' </h5> ';
-	   	 echo '</a>';
-	   		}
-
-	   	}
-
   		 ?>
 
   	</div>
@@ -160,7 +183,7 @@
 
 
   	<div class="conversa">
-  		
+  	
 
   		  	<form id="form_msg" class="input-group">
   			<div class="rows">
