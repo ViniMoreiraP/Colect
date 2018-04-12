@@ -77,7 +77,7 @@ $descricao=$_POST['descricao'];
  
  			if (mysqli_query($link, $sql)){
  				echo "arquivo cadastrado no banco e na pasta";
- 				header('location: home.php');
+ 				header('location: meus_livros.php');
  			}else{
  				echo "erro ao registrar usuario";
  			}

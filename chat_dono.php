@@ -192,15 +192,11 @@
             placeholder="Mensagem"></textarea>
 			</div>
            <div class="col-md-2">
-              <div class="btn-group-vertical" role="group" >
-                  
-            	
+              <div class="btn-group-vertical  " role="group" >
+                
               	<button class="btn btn-success" id="btn_voltar" type="button">voltar</button>
 
                 <button class="btn btn-success" id="btn_msg" type="button">Enviar</button>
-              
-
-
 
                 <button class="btn btn-success" id="btn_limpar" type="button">Limpar</button>
               

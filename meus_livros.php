@@ -4,7 +4,37 @@
    
     $id_usuario= $_SESSION['id'];
     
+    require_once('db.class.php');
+    $objDb = new db();
+    $link =$objDb->conecta_mysql();
+
+    //--qtd de livros
+
+    $sql= "SELECT count(*) AS qtd_livros FROM livros";
+    $resultado_id= mysqli_query($link, $sql);
+
+
+    if ($resultado_id) {
+      $registo= mysqli_fetch_array($resultado_id,MYSQLI_ASSOC);
+      $qtd_livros= $registo['qtd_livros'];
+      
+    }else{
+      echo "Erro na consulta ao banco de dados";
+    }
   
+    //--qtd de livros do usuario
+    $sql.= " where id_usuario= $id_usuario";
+
+
+    $resultado_id= mysqli_query($link, $sql);
+    if ($resultado_id) {
+      $registo= mysqli_fetch_array($resultado_id,MYSQLI_ASSOC);
+      $qtd_livros_usuario= $registo['qtd_livros'];
+      
+    }else{
+      echo "Erro na consulta ao banco de dados";
+    }
+
    ?>
 
 
@@ -32,21 +62,44 @@
 
 
 
-           function atualizaLivros(){
+           function atualizaMeusLivros(){
         $.ajax({
-          url: 'atualiza_livros.php',
+          url: 'atualiza_meus_livros.php',
           success: function(data){
-            $('#recendes').html(data);
+            $('#meusLivros').html(data);
              
           }
           })
        }
 
+        atualizaMeusLivros();
 
-        atualizaLivros();
+
+
+
+
+
+
+        $('#meu').click(function(){
+          alert('chega bb');
+
+
+        })
+
+
+
+        
+
+
+
 
 
       });
+
+
+
+
+
 
         </script>
 
@@ -73,10 +126,10 @@
      <div class="container principal">
 
       <div class="row">
-      <div class="col-md-3">
+              <div class="col-md-3">
         
-
-        <?php include('painel_intro.php') ?>
+ 
+                <?php include('painel_intro.php'); ?>
 
 
 
@@ -87,9 +140,9 @@
 
 
              <div class="panel panel-default">
-              <div style="text-align: center;"><h2>Adicionados Recentemente</h2></div>
+              <div style="text-align: center;"><h2 id="meu">Meus Livros</h2></div>
               
-            <div class="panel-body"  id="recendes">
+            <div class="panel-body"  id="meusLivros">
 
 
       </div>
