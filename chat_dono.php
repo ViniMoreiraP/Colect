@@ -23,7 +23,7 @@
 
         	  $(document).ready(function(){
 
-   			      	var  id_chat;
+   			      var  id_chat;
         	  	$('.conversa').hide();
 
 
@@ -71,18 +71,39 @@
 					})
 					
 
-
-
         	  		}else{
         	  			alert('digite algo');
         	  		}
 
-
-
-
-
-
         	  	});
+
+
+            $('#btn_reservar').click(function(){
+ 
+                  $.ajax({
+
+            url: 'reserva_livro.php',
+            method: 'post',
+
+              data: {
+                      id_chat: id_chat,
+                    },
+                        
+
+            success: function(data){
+                atualizaMensagens();
+               
+
+             
+             
+            }
+          })
+          
+
+              });
+
+
+
 
 
 
@@ -127,14 +148,18 @@
 
   		<?php 
   	
-	   $sql= "SELECT cl.* , u.usuario FROM chat_livro as cl JOIN usuarios as u ON (cl.id_interessado= u.id) WHERE id_livro =$id_livro " ;
-	 
-	  
+	   $sql= "SELECT cl.* , u.usuario, u.id, u.pontos FROM chat_livro as cl JOIN usuarios as u ON (cl.id_interessado= u.id) WHERE id_livro =$id_livro ORDER BY pontos DESC " ;
+
+
+
+	
 
     if ($resultado_id= mysqli_query($link, $sql)) {
 
 
        $registo= mysqli_fetch_array($resultado_id,MYSQLI_ASSOC);
+ 
+
 
 
        if (is_null($registo)) {
@@ -143,9 +168,16 @@
        echo '</a>';
        }else{
 
+      
+
+
 
        echo '<a id='.$registo['id_chat'].' href ="#" class="list-group-item lista-chats ">';
-       echo '<h5 class="list-group-item-heading">'.$registo['usuario'].' </h5> ';
+        if ($id_interessado_reservado== $registo['id']) {
+        echo ' <span class="badge"> * </span>';
+       }
+       echo '<h5 class="list-group-item-heading">'.$registo['usuario'].' - '.$registo['pontos'].' Pts </h5> ';
+      
        echo '</a>';
         
 
@@ -159,7 +191,10 @@
           }
 
         echo '<a id='.$registo['id_chat'].' href ="#" class="list-group-item lista-chats ">';
-       echo '<h5 class="list-group-item-heading">'.$registo['usuario'].' </h5> ';
+         if ($id_interessado_reservado== $registo['id']) {
+        echo ' <span class="badge"> * </span>';
+       }
+       echo '<h5 class="list-group-item-heading">'.$registo['usuario'].' - '.$registo['pontos'].' Pts  </h5> ';
        echo '</a>';
         
 
@@ -191,7 +226,7 @@
   			<textarea class="form-control" id="text_msg" rows="5" name="text_msg"
             placeholder="Mensagem"></textarea>
 			</div>
-           <div class="col-md-2">
+           <div style="margin-left: -25px" class="col-md-2">
               <div class="btn-group-vertical  " role="group" >
                 
               	<button class="btn btn-success" id="btn_voltar" type="button">voltar</button>
@@ -199,6 +234,10 @@
                 <button class="btn btn-success" id="btn_msg" type="button">Enviar</button>
 
                 <button class="btn btn-success" id="btn_limpar" type="button">Limpar</button>
+
+                <button class="btn btn-success" id="btn_reservar" type="button">Reservar</button>
+
+
               
               </div>
 

@@ -26,8 +26,49 @@
 
 
 
-        <script type="text/javascript">
-          $(document).ready(function(){
+  <script type="text/javascript">
+
+
+
+
+
+
+
+
+   $(document).ready(function(){
+
+
+
+
+
+
+
+    function getLocation()
+  {
+  if (navigator.geolocation)
+    {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    }
+  else{x.innerHTML="O seu navegador não suporta Geolocalização.";}
+  }
+function showPosition(position)
+  {
+
+    var latitude= position.coords.latitude;
+    var longitude=position.coords.longitude;
+
+     $('#latitude').hide();
+       $('#longitude').hide();
+     $('#latitude').val(latitude);
+      $('#longitude').val(longitude);
+
+
+
+
+  }
+
+ 
+          getLocation();
 
           $('#btn_procura_livros').click(function(){
 
@@ -94,6 +135,8 @@
           <div class="panel-body">
             <form id="form_procura_livros" class="input-group">
               <input type="text" id="nome_livro" name="nome_livro" class="form-control" placeholder="Quem voce esta procurando?" maxlength="140" />
+              <input type="number" name="latitude"   id="latitude">
+               <input type="number" name="longitude" id="longitude">
               <span class="input-group-btn">
                 <button class="btn btn-default" id="btn_procura_livros" type="button">Procurar</button>
               </span>
@@ -112,6 +155,8 @@
 
 
 
+
+</body>
 
 
 

@@ -15,9 +15,14 @@ $id_usuario= $_SESSION['id'];
 
 $titulo=$_POST['titulo'];
 $descricao=$_POST['descricao'];
+$endereco=$_POST['txtEndereco'];
+$latitude=$_POST['txtLatitude'];
+$longitude=$_POST['txtLongitude'];
 
 
-		
+
+
+
 
  		$_UP['pasta'] = 'img-livros/';
 
@@ -72,11 +77,19 @@ $descricao=$_POST['descricao'];
  			if (move_uploaded_file($_FILES['arquivo']['tmp_name'], $_UP['pasta'].$nome_final)) {
  				// se foi possivel salvamos no banco
 
- 			$sql = "INSERT into livros (id_usuario, titulo, descricao ,disponivel, arquivo ) 
- 			VALUES ($id_usuario , '$titulo', '$descricao'  , 'true', '$nome_final')";	
+ 			$sql = "INSERT into livros (id_usuario, titulo, descricao ,disponivel, arquivo, endereco, latitude, longitude ) 
+ 			VALUES ($id_usuario , '$titulo', '$descricao'  , 'true', '$nome_final', '$endereco', $latitude, $longitude)";	
  
  			if (mysqli_query($link, $sql)){
  				echo "arquivo cadastrado no banco e na pasta";
+
+
+			$sql = "UPDATE usuarios SET pontos=pontos+20 WHERE id= $id_usuario";
+
+			mysqli_query($link, $sql);
+
+
+
  				header('location: meus_livros.php');
  			}else{
  				echo "erro ao registrar usuario";
@@ -94,9 +107,6 @@ $descricao=$_POST['descricao'];
 
 
  		}
-
-
-
 
 
 

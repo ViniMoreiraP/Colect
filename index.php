@@ -198,7 +198,7 @@
 
           <!-- modal cadastro -->
 
-          <form class="modal fade" id="cadastro" method="post" action="registrar_usuario.php">
+          <form class="modal fade" id="cadastro" method="post" action="envia_email_gmail.php">
                      
             <div class="modal-dialog modal-sm">
               

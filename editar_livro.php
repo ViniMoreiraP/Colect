@@ -26,14 +26,14 @@ echo "$descricao <br>";
 $sql = "UPDATE livros SET titulo='$titulo',descricao='$descricao' WHERE id_livro= $id_livro";
 echo "$sql";
 
-/*		if (mysqli_query($link, $sql)){
+		if (mysqli_query($link, $sql)){
 			header('location:meus_livros.php');
 		}else {
 			echo "erro na edicao do banco de dados";
 		}
 
 
-*/		
+	
 
  ?>
 

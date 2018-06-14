@@ -4,9 +4,9 @@
 
 	require_once('db.class.php');
 
-		$email= $_POST['email'];
-		$nome= $_POST['nome'] ;
-		$senha= md5($_POST['senha']) 	;
+		$email= $_GET['email'];
+		$nome= $_GET['nome'] ;
+		$senha= md5($_GET['senha']) 	;
 
 
 

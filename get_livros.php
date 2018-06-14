@@ -15,6 +15,22 @@
 
 	
 	$nome_livro= $_POST['nome_livro'];
+	$latitude=$_POST['latitude'];
+	$longitude=$_POST['longitude'];
+
+
+function distancia($lat1, $lon1, $lat2, $lon2) {
+
+$lat1 = deg2rad($lat1);
+$lat2 = deg2rad($lat2);
+$lon1 = deg2rad($lon1);
+$lon2 = deg2rad($lon2);
+
+$dist = (6371 * acos( cos( $lat1 ) * cos( $lat2 ) * cos( $lon2 - $lon1 ) + sin( $lat1 ) * sin($lat2) ) );
+$dist = number_format($dist, 2, '.', '');
+return $dist;
+}
+
 
 
 
@@ -35,7 +51,8 @@
 
 		   	echo '<a href ="livro.php?cod='.md5($registo['id_livro']).'&" class="list-group-item">';
 	   	 	echo ' <strong> '.$registo['titulo'].'</strong> ';
-	   	 	
+	   		echo ' <span class="badge">'.distancia($registo['latitude'],$registo['longitude'], $latitude,$longitude).'  Km<br /> </span>';
+	   		
 	   	
 	   	 echo '</a>';
 

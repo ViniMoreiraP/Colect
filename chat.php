@@ -30,6 +30,8 @@ require_once('db.class.php');
  		$registo= mysqli_fetch_array($resultado_id,MYSQLI_ASSOC);
 
  		$id_livro= $registo['id_livro'];
+ 		$id_interessado_reservado= $registo['id_interessado_reservado'];
+
 
  		if ($id_usuario == $registo['id_usuario'] ) {
  			include('chat_dono.php');
